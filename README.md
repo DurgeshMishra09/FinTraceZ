@@ -1,37 +1,36 @@
-FinTrace Z — Team Code Rhythm
+# FinTrace Z — Team CodeRhythm
 
-IBM Z Datathon 2026 | AI Secured: Innovation Without Exposure
+**IBM Z Datathon 2026 | Theme: AI Secured: Innovation Without Exposure**
+**Event code: SSF2026**
 
-FinTrace Z is a web-based prototype designed to help investigators trace suspicious money transfers across connected bank accounts. It makes it easier to understand where the money started, how it moved between accounts, and where it finally ended up.
+FinTrace Z is a web prototype that helps an investigator follow scam money through connected bank accounts: where it started, how it moved, and where it ended.
 
-Technology used: Vite, React, TypeScript, Tailwind CSS 4, Framer Motion and Lenis.
+## Runs on IBM LinuxONE
+- Built and served on the IBM LinuxONE Community Cloud (s390x), inside the JupyterLab Docker container, using Node.js 22 for s390x.
+- Tailwind CSS 4 needs native binaries that do not exist for s390x, so the project uses Tailwind CSS 3 (pure JavaScript). 
 
-How to Run
+## Run it
+    npm install
+    npm run build
+    npm run preview -- --host
 
-Install the required packages and start the website:
+Open http://localhost:4173. For development use `npm run dev -- --host` (http://localhost:5173).
 
-npm install
-npm run dev -- --host
+## What it does today
+- **CSV analysis in the browser:** the file is never uploaded to a server. Needs sender, receiver and amount columns; a timestamp column enables speed checks.
+- **Five transparent, rule-based checks with points:** fast pass-through, fan-in, fan-out, chain hopping, cash-out point.
+- **Money trail:** a top-down tree from the scam source, accounts numbered in time order, each route labelled with its amount, and a red arrow where the money ends.
+- **Account details:** click an account to see its path from the start, how it divides, and where it ends. Trails above 14 accounts open one account at a time.
 
-Open the local URL shown in the terminal, usually "http://localhost:5173".
+## Planned, not built yet
+Federated learning, differential privacy and secure aggregation.
 
-To build and preview the project:
+An alert is a lead for a human to review, not proof of fraud. The sample data is fictional.
 
-npm run build
-npm run preview -- --host
-
-For Termux or Android, if installation or startup fails because of a package issue, check the error message in the terminal.
-
-Features Currently Available
-
-- CSV upload: Read transaction data directly in the browser. The file is not uploaded to a server. The CSV should contain sender, receiver and amount columns. A timestamp column is needed for checking transfer speed.
-- Fraud pattern checks: Five rule-based checks look for fast pass-through transfers, fan-in, fan-out, chain hopping and possible cash-out points.
-- Money trail: Follow the money from the suspected scam source through connected accounts. Each transfer shows its amount, and accounts are arranged in time order.
-- Account details: Select an account to view how the money reached it, how it was transferred further and where the trail ended. For trails involving more than 14 accounts, the view switches to a step-by-step investigation.
-- Visual investigation: The trail uses a top-down tree layout, with red arrows highlighting the end of the money trail.
-
-Future Scope
-
-Federated learning, differential privacy, secure aggregation and deployment on IBM LinuxONE are planned for future development. These features are not yet implemented in the current prototype.
-
-The tool is intended to help investigators identify cases that may need further review. Its alerts are not proof of fraud, and the sample transaction data is fictional.
+## Open-source libraries used
+- React: https://react.dev
+- Vite: https://vite.dev
+- TypeScript: https://www.typescriptlang.org
+- Tailwind CSS 3: https://tailwindcss.com
+- Framer Motion: https://www.framer.com/motion
+- Lenis: https://lenis.darkroom.engineering
